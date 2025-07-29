@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import random
 
 
@@ -26,11 +27,13 @@ def main():
         sheet_name='Sheet1'
     )
     print(f'Origina DataFrame:\n{df}')
+    print('_'*100)
 
     excluded = ['Name', 'Status']
 
     for col in df.columns:
         if col not in excluded:
+            df[col] = df[col].replace(np.nan, '')
             df[col] = df[col].astype(str).apply(randomizeLetters)
 
     print(f'Shuffled DataFrame:\n{df}')
